@@ -238,7 +238,7 @@ A: 60 events × 35 tests is small for retrieval benchmarks, but the three extern
 A: The core bench is primarily Russian (source domain); LoCoMo is English; LongMemEval/ES-MemEval are English. Multi-lingual parity is on roadmap.
 
 **Q: Where's the paper?**
-A: Pulse v3 paper preprint is in preparation in a separate private repository. Public release after first arXiv submission.
+A: *Hearth and Pulse: A Twelve-Month Case Study of State-Aware Empathic Memory in Production* — arXiv preprint in preparation in a separate private repository. Public release after first arXiv submission.
 
 ---
 
