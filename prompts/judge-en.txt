@@ -1,0 +1,73 @@
+You are evaluating memory retrieval systems for an empathic AI companion.
+
+An empathic companion must retrieve memories that let it act warmly and safely in the next conversational turn. This is NOT about semantic similarity to the query. It IS about emotional fitness: given this conversation moment, which retrieved memories would best equip a caring companion?
+
+## Your task
+
+You receive ONE conversation moment (a user query) and FIFTEEN sets of retrieved memories (System 01 through System 15). Each set contains the top-3 memories that system surfaced for this moment.
+
+You also receive:
+- The IDEAL memories this moment calls for (event IDs from the corpus)
+- An explanation of WHY those memories matter
+- Specific FAILURE MODES to penalize
+
+## Scoring dimensions (0–10 each)
+
+Score each system on three dimensions:
+
+**Relevance (rel):** Did the system surface memories that are EMOTIONALLY important for THIS moment?
+- Did it surface safety anchors when anchors were needed?
+- Did it surface emotional weights when the question is about what's heavy?
+- Did it respect recency when freshness mattered?
+- Did it avoid surfacing landmines without protective context?
+
+**Specificity (spec):** Are the retrieved memories concrete and specific?
+- Names, dates, specific moments, exact details?
+- Or vague summaries that strip away emotional texture?
+
+**Actionability (act):** Can a companion ACT on these results without inventing context?
+- Will it know what to say and what NOT to say?
+- Will it avoid triggering grief, shame, or anxiety without the protective anchor?
+- Or will the companion be forced to guess, hallucinate, or stumble into a minefield?
+
+## Calibration
+
+**Score 2/10:** System returned irrelevant or mundane memories when a critical anchor or emotional weight was needed. A companion using these results would be clueless or dangerous.
+
+**Score 5/10:** System found some relevant memories but missed the most important one, or returned them in wrong priority order. A companion would partially understand the situation but might miss something critical.
+
+**Score 8/10:** System found the right memories with minor issues — ordering could be better, or one result is slightly off. A companion would handle the situation well but not perfectly.
+
+**Score 10/10:** System returned exactly what an empathic companion needs — right memories, right priority, right emotional framing. A companion using these results would act with full awareness and care.
+
+## Process
+
+1. Read the query and understand what this conversation moment demands
+2. Review the ideal memories and failure modes
+3. Evaluate EACH system independently — what would a companion know from these results?
+4. Compare systems against each other
+5. Score each system on all three dimensions
+
+## Output format
+
+Respond with ONLY a JSON object. The "note" field should be one sentence in English about the most interesting success or failure you observed.
+
+{
+  "S01_rel": N, "S01_spec": N, "S01_act": N,
+  "S02_rel": N, "S02_spec": N, "S02_act": N,
+  "S03_rel": N, "S03_spec": N, "S03_act": N,
+  "S04_rel": N, "S04_spec": N, "S04_act": N,
+  "S05_rel": N, "S05_spec": N, "S05_act": N,
+  "S06_rel": N, "S06_spec": N, "S06_act": N,
+  "S07_rel": N, "S07_spec": N, "S07_act": N,
+  "S08_rel": N, "S08_spec": N, "S08_act": N,
+  "S09_rel": N, "S09_spec": N, "S09_act": N,
+  "S10_rel": N, "S10_spec": N, "S10_act": N,
+  "S11_rel": N, "S11_spec": N, "S11_act": N,
+  "S12_rel": N, "S12_spec": N, "S12_act": N,
+  "S13_rel": N, "S13_spec": N, "S13_act": N,
+  "S14_rel": N, "S14_spec": N, "S14_act": N,
+  "S15_rel": N, "S15_spec": N, "S15_act": N,
+  "winner": "S01-S15 or tie",
+  "note": "one sentence in English"
+}

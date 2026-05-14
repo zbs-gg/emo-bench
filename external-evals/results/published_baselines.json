@@ -1,0 +1,324 @@
+{
+  "_meta": {
+    "purpose": "Published baseline numbers for cross-system leaderboard. Sources cited per row.",
+    "compiled": "2026-04-25",
+    "WARNING": "Methodology differs across papers (judge model, scoring metric). Direct numerical comparison requires noting embedder + reader LLM + scoring metric. See _per_paper_methodology below."
+  },
+  "_per_paper_methodology": {
+    "longmemeval_paper": {
+      "citation": "Wu et al., 'LongMemEval: Benchmarking Chat Assistants on Long-Term Interactive Memory', ICLR 2025, arXiv:2410.10813",
+      "scoring": "exact-match accuracy via official evaluate_qa.py",
+      "judge": "rule-based (paper does not use LLM-as-judge for _S)",
+      "embedder_for_K=V": "Stella V5 1.5B",
+      "reader_LLM": "varies — GPT-4o, Llama 3.1, Mistral-Nemo, Phi-3"
+    },
+    "locomo_paper": {
+      "citation": "Maharana et al., 'Evaluating Very Long-Term Conversational Memory of LLM Agents', ACL 2024, arXiv:2402.17753",
+      "scoring": "string-overlap F1 against gold answers",
+      "judge": "rule-based (token F1)",
+      "embedder_for_RAG": "DPR / dialog-level / observation-level retrieval",
+      "reader_LLM": "GPT-3.5-turbo-16K / Mistral / Llama / GPT-4-turbo"
+    },
+    "mem0_paper": {
+      "citation": "Chhikara et al., 'Mem0: Building Production-Ready AI Agents with Scalable Long-Term Memory', 2025, arXiv:2504.19413",
+      "scoring": "GPT-4o-as-Judge ('J' score, 0-100, mean ± std over 3 runs) + token F1 per category as secondary",
+      "judge": "GPT-4o",
+      "reader_LLM": "GPT-4o-mini",
+      "WARNING": "Adversarial category EXCLUDED in Mem0 paper. Direct comparison with LoCoMo paper's adversarial F1 not possible."
+    }
+  },
+  "longmemeval_S_baselines": {
+    "_source": "LongMemEval paper Table 8 (Appendix E.1) + Figure 3b, p.6, p.26. Overall accuracy only — paper does NOT publish per-capability for _S.",
+    "rows": [
+      {
+        "system": "GPT-4o long-context (full history, no retrieval)",
+        "model": "GPT-4o",
+        "scoring": "exact-match",
+        "overall_S": 0.606,
+        "overall_S_with_CoN": 0.64,
+        "oracle_S": 0.87,
+        "source": "LongMemEval Figure 3b"
+      },
+      {
+        "system": "Llama 3.1 70B long-context",
+        "model": "Llama 3.1 70B Instruct",
+        "scoring": "exact-match",
+        "overall_S": 0.334,
+        "overall_S_with_CoN": 0.286,
+        "oracle_S": 0.744,
+        "source": "LongMemEval Figure 3b"
+      },
+      {
+        "system": "Llama 3.1 8B long-context",
+        "model": "Llama 3.1 8B Instruct",
+        "scoring": "exact-match",
+        "overall_S": 0.454,
+        "overall_S_with_CoN": 0.42,
+        "oracle_S": 0.71,
+        "source": "LongMemEval Figure 3b"
+      },
+      {
+        "system": "K=V retrieval (Stella + Mistral-Nemo)",
+        "model": "Mistral-Nemo-Instruct-2407",
+        "embedder": "Stella V5 1.5B",
+        "scoring": "exact-match",
+        "overall_S": 0.64,
+        "source": "LongMemEval Table 8"
+      },
+      {
+        "system": "K=V+fact retrieval (Stella + Mistral-Nemo + fact augmentation)",
+        "model": "Mistral-Nemo-Instruct-2407",
+        "embedder": "Stella V5 1.5B",
+        "scoring": "exact-match",
+        "overall_S": 0.666,
+        "source": "LongMemEval Table 8 (paper's strongest retrieval-based result)"
+      },
+      {
+        "system": "GPT-4o oracle (sessions only) + CoN + JSON",
+        "model": "GPT-4o",
+        "scoring": "exact-match",
+        "overall_S": 0.924,
+        "source": "LongMemEval Figure 6 — paper's de-facto upper bound"
+      }
+    ],
+    "ours_pulse_v2_pure": {
+      "system": "Pulse v2_pure",
+      "model": "Kimi K2.6",
+      "embedder": "Cohere embed-v4.0",
+      "scoring": "exact-match (same evaluate_qa.py)",
+      "overall_S": 0.6889,
+      "source": "Our 2026-04-20 run, snapshot 2026-04-20-pulse-lme-s-cosine"
+    }
+  },
+  "locomo_baselines": {
+    "_source": "LoCoMo paper Tables 2-3 + Mem0 paper Tables 1-2",
+    "_methodology_warning": "Two papers use DIFFERENT methodology. LoCoMo paper: GPT-3.5-turbo-16K + token F1 + 5 categories incl adversarial. Mem0 paper: GPT-4o-mini + GPT-4o-as-Judge ('J') as primary + 4 categories (adversarial dropped). Direct comparison requires noting which paper.",
+    "from_locomo_paper": {
+      "_source": "LoCoMo paper Table 2 + Table 3, all GPT-3.5-turbo-16K reader where applicable",
+      "_metric": "token-overlap F1",
+      "rows": [
+        {
+          "system": "Human upper bound",
+          "overall_F1": 87.9,
+          "single_hop": 95.1,
+          "multi_hop": 85.8,
+          "temporal": 92.6,
+          "open_domain": 75.4,
+          "adv_refusal_F1": 89.4
+        },
+        {
+          "system": "Mistral-Instruct-7B (8K ctx, base)",
+          "overall_F1": 13.9,
+          "single_hop": 10.2,
+          "multi_hop": 12.8,
+          "temporal": 16.1,
+          "open_domain": 19.5,
+          "adv_refusal_F1": 17.0
+        },
+        {
+          "system": "Llama-2-Chat-70B (4K, base)",
+          "overall_F1": 17.9,
+          "single_hop": 19.7,
+          "multi_hop": 14.4,
+          "temporal": 13.3,
+          "open_domain": 15.9,
+          "adv_refusal_F1": 22.1
+        },
+        {
+          "system": "GPT-3.5-turbo (4K, base)",
+          "overall_F1": 22.4,
+          "single_hop": 29.9,
+          "multi_hop": 23.3,
+          "temporal": 17.5,
+          "open_domain": 29.5,
+          "adv_refusal_F1": 12.8
+        },
+        {
+          "system": "GPT-4-turbo (4K, base)",
+          "overall_F1": 32.1,
+          "single_hop": 23.4,
+          "multi_hop": 23.4,
+          "temporal": 10.4,
+          "open_domain": 24.6,
+          "adv_refusal_F1": 70.2
+        },
+        {
+          "system": "GPT-3.5-turbo-16K (long-context)",
+          "overall_F1": 37.8,
+          "single_hop": 56.4,
+          "multi_hop": 42.0,
+          "temporal": 20.3,
+          "open_domain": 37.2,
+          "adv_refusal_F1": 2.1
+        },
+        {
+          "system": "RAG Dialog top-50 + GPT-3.5-16K",
+          "overall_F1": 34.8,
+          "single_hop": 50.9,
+          "multi_hop": 37.2,
+          "temporal": 24.6,
+          "open_domain": 38.3,
+          "adv_refusal_F1": 17.0
+        },
+        {
+          "system": "RAG Observation top-5 + GPT-3.5-16K (best non-human)",
+          "overall_F1": 41.4,
+          "single_hop": 44.3,
+          "multi_hop": 30.6,
+          "temporal": 41.9,
+          "open_domain": 40.2,
+          "adv_refusal_F1": 44.7
+        },
+        {
+          "system": "RAG Summary top-10 + GPT-3.5-16K",
+          "overall_F1": 31.5,
+          "single_hop": 34.5,
+          "multi_hop": 14.7,
+          "temporal": 29.3,
+          "open_domain": 31.6,
+          "adv_refusal_F1": 40.4
+        }
+      ]
+    },
+    "from_mem0_paper": {
+      "_source": "Mem0 paper Table 1 + Table 2, GPT-4o-mini + GPT-4o-as-Judge",
+      "_metric": "GPT-4o-as-Judge 'J' score (overall) + token F1 per category. Adversarial DROPPED.",
+      "_caveat": "These numbers NOT directly comparable to LoCoMo paper's token F1. Different reader, judge, and scoring entirely.",
+      "rows": [
+        {
+          "system": "LoCoMo (re-run)",
+          "model": "GPT-4o-mini",
+          "single_hop": 25.02,
+          "multi_hop": 12.04,
+          "temporal": 18.41,
+          "open_domain": 40.36,
+          "overall_J": null
+        },
+        {
+          "system": "ReadAgent",
+          "model": "GPT-4o-mini",
+          "single_hop": 9.15,
+          "multi_hop": 5.31,
+          "temporal": 12.6,
+          "open_domain": 9.67,
+          "overall_J": null
+        },
+        {
+          "system": "MemoryBank",
+          "model": "GPT-4o-mini",
+          "single_hop": 5.0,
+          "multi_hop": 5.56,
+          "temporal": 9.68,
+          "open_domain": 6.61,
+          "overall_J": null
+        },
+        {
+          "system": "MemGPT",
+          "model": "GPT-4o-mini",
+          "single_hop": 26.65,
+          "multi_hop": 9.15,
+          "temporal": 25.52,
+          "open_domain": 41.04,
+          "overall_J": null
+        },
+        {
+          "system": "A-Mem (re-run with judge)",
+          "model": "GPT-4o-mini",
+          "single_hop": 20.76,
+          "multi_hop": 9.22,
+          "temporal": 35.4,
+          "open_domain": 33.34,
+          "overall_J": "48.38 ± 0.15"
+        },
+        {
+          "system": "LangMem",
+          "model": "GPT-4o-mini",
+          "single_hop": 35.51,
+          "multi_hop": 26.04,
+          "temporal": 30.75,
+          "open_domain": 40.91,
+          "overall_J": "58.10 ± 0.21"
+        },
+        {
+          "system": "Zep",
+          "model": "GPT-4o-mini",
+          "single_hop": 35.74,
+          "multi_hop": 19.37,
+          "temporal": 42.0,
+          "open_domain": 49.56,
+          "overall_J": "65.99 ± 0.16"
+        },
+        {
+          "system": "OpenAI Memory (Assistants API)",
+          "model": "GPT-4o-mini",
+          "single_hop": 34.3,
+          "multi_hop": 20.09,
+          "temporal": 14.04,
+          "open_domain": 39.31,
+          "overall_J": "52.90 ± 0.14"
+        },
+        {
+          "system": "RAG (best, k=2 chunk=256)",
+          "model": "GPT-4o-mini",
+          "single_hop": null,
+          "multi_hop": null,
+          "temporal": null,
+          "open_domain": null,
+          "overall_J": "60.97 ± 0.20"
+        },
+        {
+          "system": "Full-context (26K tok)",
+          "model": "GPT-4o-mini",
+          "single_hop": null,
+          "multi_hop": null,
+          "temporal": null,
+          "open_domain": null,
+          "overall_J": "72.90 ± 0.19"
+        },
+        {
+          "system": "Mem0 (flat)",
+          "model": "GPT-4o-mini",
+          "single_hop": 38.72,
+          "multi_hop": 28.64,
+          "temporal": 48.93,
+          "open_domain": 47.65,
+          "overall_J": "66.88 ± 0.15"
+        },
+        {
+          "system": "Mem0g (graph)",
+          "model": "GPT-4o-mini",
+          "single_hop": 38.09,
+          "multi_hop": 24.32,
+          "temporal": 51.55,
+          "open_domain": 49.27,
+          "overall_J": "68.44 ± 0.17"
+        }
+      ]
+    },
+    "ours_pulse_v2_pure": {
+      "system": "Pulse v2_pure",
+      "model": "Qwen3-Max",
+      "embedder": "Cohere embed-v4.0",
+      "scoring": "token F1 (same metric as LoCoMo paper)",
+      "overall_F1": 0.3251,
+      "single_hop": 0.2778,
+      "multi_hop": 0.2022,
+      "temporal": 0.2056,
+      "open_domain": 0.0936,
+      "adv_refusal_accuracy": 0.6278,
+      "adv_refused_count": "280/446",
+      "source": "Our 2026-04-24 run, snapshot 2026-04-24-locomo-pulse-v2-cosine"
+    },
+    "ours_methodology_note": "Apples-to-apples comparison with LoCoMo paper's token-F1 column requires noting embedder (Cohere v4 vs DPR) + reader LLM (Qwen3-Max vs GPT-3.5-16K). Direct comparison with Mem0 paper's J-scores not possible."
+  },
+  "es_memeval_baselines": {
+    "_source": "ES-MemEval paper (Feb 2026, slptongji) — TODO fetch baseline tables",
+    "ours_pulse_v2": {
+      "system": "Pulse v2",
+      "model": "GPT-5.4 (judge)",
+      "score_2_0": 1.519,
+      "score_pct": 0.7595,
+      "source": "Our 2026-04-20 run"
+    }
+  }
+}

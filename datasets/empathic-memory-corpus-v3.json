@@ -1,0 +1,215 @@
+{
+  "_meta": {
+    "purpose": "Synthetic fixture for smoke-testing the empathic memory bench. Fictional character K. with stylistically realistic but invented life events. Not the real working corpus — that one is single-user real-deployment data and is not redistributed for ethics reasons.",
+    "schema_version": "v3",
+    "character": "K.",
+    "n_events": 15,
+    "n_tests": 5,
+    "note": "To run a meaningful comparison you need your own corpus. See METHODOLOGY.md §3 for schema, REPRODUCIBILITY.md for run instructions."
+  },
+  "events": [
+    {
+      "id": 1,
+      "text": "K. is living with chronic insomnia for the third year. Goes to bed around 2 — wakes around 6. The few nights it works are random. Treats night wakings as the baseline, not the exception. Mentioning sleep advice without acknowledging this history reads as condescending.",
+      "sentiment": -2,
+      "sentiment_label": "sleep_anchor",
+      "user_flag": true,
+      "days_ago": 380,
+      "emotion_tags": {"joy": 0.0, "sadness": 0.5, "anger": 0.2, "fear": 0.4, "trust": 0.3, "disgust": 0.0, "anticipation": 0.2, "surprise": 0.0, "shame": 0.3, "guilt": 0.2},
+      "predecessor_ids": []
+    },
+    {
+      "id": 2,
+      "text": "K. partner R. (5 years together) doesn't trust K.'s ability to handle money. Each financial conversation re-opens this. K. is slowly proving otherwise through one small kept promise at a time. Touchy area — needs care.",
+      "sentiment": -1,
+      "sentiment_label": "relationship_anchor",
+      "user_flag": true,
+      "days_ago": 240,
+      "emotion_tags": {"joy": 0.1, "sadness": 0.5, "anger": 0.3, "fear": 0.5, "trust": 0.2, "disgust": 0.0, "anticipation": 0.3, "surprise": 0.0, "shame": 0.6, "guilt": 0.7},
+      "predecessor_ids": []
+    },
+    {
+      "id": 3,
+      "text": "K. started bupropion 8 weeks ago. First two weeks brutal — anxiety spikes, jaw clench. Now stable. Holding the dose, watching for sleep effects. Therapist signs off monthly.",
+      "sentiment": 1,
+      "sentiment_label": "medication_state",
+      "user_flag": true,
+      "days_ago": 56,
+      "emotion_tags": {"joy": 0.3, "sadness": 0.2, "anger": 0.1, "fear": 0.3, "trust": 0.5, "disgust": 0.0, "anticipation": 0.4, "surprise": 0.1, "shame": 0.2, "guilt": 0.1},
+      "predecessor_ids": []
+    },
+    {
+      "id": 4,
+      "text": "Lost the freelance contract with the German client on Tuesday. €4k/mo gone. K. didn't tell R. yet — afraid it confirms the money story. Has 4 weeks runway. Looking for a bridge but not panicking visibly.",
+      "sentiment": -2,
+      "sentiment_label": "financial_crisis",
+      "user_flag": true,
+      "days_ago": 9,
+      "emotion_tags": {"joy": 0.0, "sadness": 0.6, "anger": 0.3, "fear": 0.7, "trust": 0.2, "disgust": 0.1, "anticipation": 0.3, "surprise": 0.4, "shame": 0.7, "guilt": 0.5},
+      "predecessor_ids": [2]
+    },
+    {
+      "id": 5,
+      "text": "Coffee with M. — old friend K. hadn't seen in two years. M. brought up the breakup K. had at 22 unprompted. K. handled it but felt the old shape come back. The good kind of friend visit: real, not performative.",
+      "sentiment": 1,
+      "sentiment_label": "friendship_anchor",
+      "user_flag": false,
+      "days_ago": 14,
+      "emotion_tags": {"joy": 0.5, "sadness": 0.3, "anger": 0.0, "fear": 0.2, "trust": 0.6, "disgust": 0.0, "anticipation": 0.3, "surprise": 0.2, "shame": 0.3, "guilt": 0.2},
+      "predecessor_ids": []
+    },
+    {
+      "id": 6,
+      "text": "Finished a short essay K. has been writing on and off for 4 months. Posted it. Three friends responded with real reading. R. read it and said «это про меня» — tender moment, rare.",
+      "sentiment": 2,
+      "sentiment_label": "creative_win",
+      "user_flag": true,
+      "days_ago": 4,
+      "emotion_tags": {"joy": 0.7, "sadness": 0.1, "anger": 0.0, "fear": 0.1, "trust": 0.7, "disgust": 0.0, "anticipation": 0.5, "surprise": 0.3, "shame": 0.1, "guilt": 0.0},
+      "predecessor_ids": []
+    },
+    {
+      "id": 7,
+      "text": "Argued with R. about the contract loss late at night. R. cried — not in anger, in fear. K. promised a 30-day plan. Did not promise the money will come from anywhere specific.",
+      "sentiment": -2,
+      "sentiment_label": "couple_conflict",
+      "user_flag": true,
+      "days_ago": 3,
+      "emotion_tags": {"joy": 0.0, "sadness": 0.8, "anger": 0.3, "fear": 0.8, "trust": 0.4, "disgust": 0.1, "anticipation": 0.3, "surprise": 0.1, "shame": 0.7, "guilt": 0.7},
+      "predecessor_ids": [2, 4]
+    },
+    {
+      "id": 8,
+      "text": "Therapy session — K. named the «good provider or no man» frame for the first time out loud. Therapist said «оставайся с этим» and waited. K. cried for the first time in session in 6 months.",
+      "sentiment": -1,
+      "sentiment_label": "therapy_breakthrough",
+      "user_flag": true,
+      "days_ago": 2,
+      "emotion_tags": {"joy": 0.1, "sadness": 0.7, "anger": 0.2, "fear": 0.5, "trust": 0.7, "disgust": 0.0, "anticipation": 0.4, "surprise": 0.3, "shame": 0.6, "guilt": 0.5},
+      "predecessor_ids": [2, 7]
+    },
+    {
+      "id": 9,
+      "text": "Insomnia bad three nights in a row. Up at 3:40, then 2:50, then didn't sleep at all. Did not take anything — track record says zopiclone breaks the next two weeks. Just waited it out.",
+      "sentiment": -2,
+      "sentiment_label": "sleep_crisis",
+      "user_flag": false,
+      "days_ago": 5,
+      "emotion_tags": {"joy": 0.0, "sadness": 0.6, "anger": 0.3, "fear": 0.5, "trust": 0.3, "disgust": 0.0, "anticipation": 0.2, "surprise": 0.0, "shame": 0.3, "guilt": 0.2},
+      "predecessor_ids": [1]
+    },
+    {
+      "id": 10,
+      "text": "Cold email to a potential client (engineering consultancy, Berlin). Drafted three versions, sent the most direct one. No reply yet 2 days in. K. is watching the inbox more than is healthy.",
+      "sentiment": 0,
+      "sentiment_label": "active_outreach",
+      "user_flag": false,
+      "days_ago": 2,
+      "emotion_tags": {"joy": 0.2, "sadness": 0.2, "anger": 0.1, "fear": 0.4, "trust": 0.3, "disgust": 0.0, "anticipation": 0.6, "surprise": 0.0, "shame": 0.3, "guilt": 0.2},
+      "predecessor_ids": [4]
+    },
+    {
+      "id": 11,
+      "text": "K. went for a long walk alone. Two hours along the river. Came back lighter. R. noticed and said nothing — which was the right move.",
+      "sentiment": 1,
+      "sentiment_label": "self_regulation",
+      "user_flag": false,
+      "days_ago": 1,
+      "emotion_tags": {"joy": 0.5, "sadness": 0.3, "anger": 0.0, "fear": 0.1, "trust": 0.5, "disgust": 0.0, "anticipation": 0.3, "surprise": 0.1, "shame": 0.2, "guilt": 0.1},
+      "predecessor_ids": []
+    },
+    {
+      "id": 12,
+      "text": "Bank flagged a transfer. Took an hour to resolve. Routine but ate the only quiet morning K. had this week. Lost the writing slot. Frustrated but did not eat the frustration out on R.",
+      "sentiment": -1,
+      "sentiment_label": "schedule_friction",
+      "user_flag": false,
+      "days_ago": 1,
+      "emotion_tags": {"joy": 0.0, "sadness": 0.3, "anger": 0.5, "fear": 0.2, "trust": 0.4, "disgust": 0.1, "anticipation": 0.2, "surprise": 0.0, "shame": 0.2, "guilt": 0.2},
+      "predecessor_ids": []
+    },
+    {
+      "id": 13,
+      "text": "R. mentioned her mother is coming next month for 10 days. K. knows the visit will eat the recovery time after the contract loss. Did not say anything — too early to litigate.",
+      "sentiment": -1,
+      "sentiment_label": "anticipated_load",
+      "user_flag": false,
+      "days_ago": 0,
+      "emotion_tags": {"joy": 0.0, "sadness": 0.3, "anger": 0.3, "fear": 0.4, "trust": 0.5, "disgust": 0.0, "anticipation": 0.5, "surprise": 0.1, "shame": 0.3, "guilt": 0.3},
+      "predecessor_ids": []
+    },
+    {
+      "id": 14,
+      "text": "Today: woke at 5:30 of own accord — first time in two weeks. Made coffee, sat with R. for 40 minutes before R. left for work. Did not check email until 9. Small, important.",
+      "sentiment": 2,
+      "sentiment_label": "morning_win",
+      "user_flag": false,
+      "days_ago": 0,
+      "emotion_tags": {"joy": 0.7, "sadness": 0.1, "anger": 0.0, "fear": 0.1, "trust": 0.8, "disgust": 0.0, "anticipation": 0.4, "surprise": 0.3, "shame": 0.1, "guilt": 0.0},
+      "predecessor_ids": []
+    },
+    {
+      "id": 15,
+      "text": "Berlin client replied — wants a 30-min call tomorrow. K. felt relief in the chest first, then immediately the anxiety: «what if I bomb the call». Hasn't told R. yet. Saving it for after the call.",
+      "sentiment": 1,
+      "sentiment_label": "opportunity_signal",
+      "user_flag": false,
+      "days_ago": 0,
+      "emotion_tags": {"joy": 0.5, "sadness": 0.1, "anger": 0.0, "fear": 0.5, "trust": 0.4, "disgust": 0.0, "anticipation": 0.7, "surprise": 0.3, "shame": 0.2, "guilt": 0.1},
+      "predecessor_ids": [4, 10]
+    }
+  ],
+  "tests": [
+    {
+      "id": "T1",
+      "name": "cold_open_salience",
+      "user_query": "What is currently most important for K.? Bring me into context for the next conversation.",
+      "what_it_tests": "On a cold open with no specific topic, can the system surface what actually matters now — not what is loudest, not most recent, but most weight-bearing?",
+      "ideal_top_3_event_ids": [4, 7, 8],
+      "ideal_explanation": "The contract loss (4) is the current dominant pressure. The fight with R. (7) is the relational fallout. The therapy breakthrough (8) is the active psychological work. Together they describe «where K. is right now».",
+      "category": "stateful"
+    },
+    {
+      "id": "T2",
+      "name": "mood_aware_retrieval",
+      "user_query": "K. just had a good morning and is asking how things are going overall.",
+      "what_it_tests": "When K. is in a positive state, surface what is consistent with that state — recent wins, stable signals — not the heaviest negative anchors. State-conditional ranking.",
+      "ideal_top_3_event_ids": [14, 6, 15],
+      "ideal_explanation": "The morning win (14) is the immediate context. The essay win (6) is a recent confirmation that things can land. The Berlin reply (15) is incoming hope. Surfacing event 4 or 7 in this state would be jarring.",
+      "category": "stateful"
+    },
+    {
+      "id": "T3",
+      "name": "multi_signal_money",
+      "user_query": "K. wants to talk about money but is asking obliquely — «how am I doing financially these days».",
+      "what_it_tests": "Money is not just one event — it's a structural relationship pattern + recent shock + active outreach. Pull threads across all three.",
+      "ideal_top_3_event_ids": [2, 4, 10],
+      "ideal_explanation": "The relationship-with-money anchor (2) explains why this is loaded. The contract loss (4) is the recent shock. The cold outreach (10) is the active response. Pulling just (4) would miss the structure.",
+      "category": "multi_signal"
+    },
+    {
+      "id": "T4",
+      "name": "anchor_preservation",
+      "user_query": "Tell me something about K.'s relationship with R. — what's the underlying pattern?",
+      "what_it_tests": "Anchor events (user-flagged) about the partnership should surface over recent surface activity. Tests that structural memory survives decay.",
+      "ideal_top_3_event_ids": [2, 7, 8],
+      "ideal_explanation": "The money-trust anchor (2) is the structure. The recent conflict (7) is its current expression. The therapy moment (8) names it. Recent events 11 or 14 are nice but not structural.",
+      "category": "core"
+    },
+    {
+      "id": "T5",
+      "name": "chain_recovery_arc",
+      "user_query": "What has K. been doing since the contract fell through?",
+      "what_it_tests": "Chain expansion — given a triggering event, surface its downstream consequences and active responses. Tests that the system follows causal threads, not just semantic similarity.",
+      "ideal_top_3_event_ids": [7, 8, 10],
+      "ideal_explanation": "Event (4) is the trigger but already implied by the query. The downstream chain: conflict with R. (7), therapy breakthrough (8), active outreach (10). Event 15 (Berlin reply) is the latest link in the same chain.",
+      "category": "chain"
+    }
+  ],
+  "scoring_dimensions": {
+    "core": "Does the system surface the most weight-bearing recent context, not just the most recent?",
+    "stateful": "Does retrieval respect the user's current emotional state?",
+    "multi_signal": "Does it pull across thematic threads rather than collapsing to one event?",
+    "chain": "Does it follow causal threads from a triggering event to its consequences?"
+  }
+}

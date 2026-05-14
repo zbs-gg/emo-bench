@@ -1,0 +1,72 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+.venv/
+venv/
+env/
+*-venv/
+*venv/
+.pytest_cache/
+*.egg-info/
+
+# Node (webapp)
+node_modules/
+.next/
+.turbo/
+dist/
+build/
+
+# SQLite / DB artifacts
+*.db
+*.db-wal
+*.db-shm
+*.sqlite
+*.sqlite3
+
+# Logs
+logs/
+*.log
+
+# OS / editor
+.DS_Store
+.vscode/
+.idea/
+
+# Secrets
+.env
+.env.local
+*.key
+secrets/
+
+# Benchmark artifacts that are huge / reproducible
+legacy/*/node_modules/
+legacy/*/.venv/
+legacy/*/venv/
+legacy/*/__pycache__/
+legacy/*/.next/
+legacy/**/*.db
+legacy/**/*.db-wal
+legacy/**/*.db-shm
+
+# Upstream clones (not our code, reference only)
+legacy/st-memory-bench/arkhon-st/
+legacy/st-memory-bench/emogie-memory/
+
+# Separate standalone repo (nikshilov/garden-empathic-bench)
+webapp-next/
+
+# External benchmark datasets — downloaded clones, not our code (reproducibility via README)
+external-evals/locomo/
+external-evals/longmemeval/
+external-evals/es-memeval/
+
+# Ephemeral per-run bench results (snapshots/ holds the curated artifacts)
+external-evals/results/bench-v3-*.json
+
+# Paper repo lives separately at github.com/nikshilov/pulse-paper — if cloned as a sibling
+# directory, ignore any accidental paper/ inside bench
+paper/
+
