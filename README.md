@@ -1,7 +1,7 @@
 # Empathic Memory Bench (v3)
 
 > **Open-source benchmark for memory systems in empathic AI companions.**
-> Recall@3 leaderboard on n=35 corpus across 5 axes: Pulse v3 leads with 0.210 R@3 vs Mem0 0.171 (+22%) and Graphiti/Zep 0.048 (+340%). LLM-judge scoring (1-10) on the same corpus shows Pulse v3 stateful 6.44 vs strongest baseline 4.08 (+58%), α_stateful = 0.815 across 11 judges from 6 vendor families. Cross-vendor label-blind re-run (Claude + GPT + Grok) preserves the lead: α_stateful = 0.699.
+> Recall@3 leaderboard on n=35 corpus across 5 axes: Pulse v3 (bge-m3 fine-tuned, strict zero-shot) leads with **0.238 R@3** vs Mem0 0.171 (+39%) and Graphiti/Zep 0.048 (+400%); also beats Pulse v3 with Cohere embed-v4.0 (0.210) by +13%. The fine-tuned bge-m3 adapter was trained on **public emotional dialogue corpora only** (EmpatheticDialogues + ESConv), with the Pulse evaluation corpus never seen during training (Gemini 3.1 Pro methodology recommendation). LLM-judge scoring (1-10) on the same corpus shows Pulse v3 stateful 6.44 vs strongest baseline 4.08 (+58%), α_stateful = 0.815 across 11 judges from 6 vendor families. Cross-vendor label-blind re-run (Claude + GPT + Grok) preserves the lead: α_stateful = 0.699.
 
 [![bench v3](https://img.shields.io/badge/bench-v3-brightgreen)](./bench-empathic-memory-v3.py)
 [![11 judges](https://img.shields.io/badge/judges-11-blue)](./prompts/judge-en.txt)
@@ -49,7 +49,8 @@ This bench measures **empathic fitness**, not retrieval accuracy — so its scor
 
 | System | Overall R@3 | core | stateful | multi_signal | chain |
 |---|---|---|---|---|---|
-| **Pulse v3** | **0.210** | 0.267 | 0.300 | 0.300 | 0.000 |
+| **Pulse v3 (bge-m3 fine-tuned, zero-shot)** | **0.238** | **0.333** | **0.367** | 0.300 | 0.000 |
+| Pulse v3 (Cohere embed-v4.0) | 0.210 | 0.267 | 0.300 | 0.300 | 0.000 |
 | cosine (baseline) | 0.181 | 0.400 | 0.200 | 0.233 | 0.000 |
 | Mem0 | 0.171 | 0.333 | 0.200 | 0.233 | 0.000 |
 | LangMem | 0.162 | 0.400 | 0.167 | 0.200 | 0.000 |
@@ -59,7 +60,18 @@ This bench measures **empathic fitness**, not retrieval accuracy — so its scor
 | bm25 (baseline) | 0.067 | 0.200 | 0.067 | 0.067 | 0.000 |
 | Graphiti (Zep) | 0.048 | 0.200 | 0.033 | 0.033 | 0.000 |
 
-R@3 = |retrieved_top_3 ∩ ideal_top_3| / |ideal_top_3|. Chain probes (10/35) lack `ideal_top_3_event_ids` in the corpus by design (judge-evaluated separately, not deterministic), so chain R@3 = 0 contributes to overall for every system uniformly. Full leaderboard with deltas: [`external-evals/results/leaderboard-v3.md`](./external-evals/results/leaderboard-v3.md).
+R@3 = |retrieved_top_3 ∩ ideal_top_3| / |ideal_top_3|. Chain probes (10/35) lack `ideal_top_3_event_ids` in the corpus by design (judge-evaluated separately, not deterministic), so chain R@3 = 0 contributes to overall for every system uniformly. Non-chain R@3 for the new SOTA: **0.333**. Full leaderboard with deltas + reproduction notes: [`external-evals/results/leaderboard-v3.md`](./external-evals/results/leaderboard-v3.md).
+
+### Fine-tuned embedder ablation (2026-05-15)
+
+The new top row uses Pulse v3's retrieval formula with the embedding backbone swapped from Cohere `embed-v4.0` to a LoRA-fine-tuned `BAAI/bge-m3` (560M params). Adapter training:
+
+- **Training data:** public emotional dialogue corpora only — [EmpatheticDialogues](https://github.com/facebookresearch/EmpatheticDialogues) (Facebook Research) + [ESConv](https://github.com/thu-coai/Emotional-Support-Conversation) (Liu et al., 2021).
+- **Strict zero-shot holdout:** the Pulse evaluation corpus (60 events × 35 tests) was *never* seen during training. Methodology recommended by Gemini 3.1 Pro review.
+- **Gains:** +13% overall R@3 vs Pulse v3 + Cohere embed-v4.0; **+25% core**, **+22% stateful**. multi_signal unchanged (0.300).
+- **Reproducibility:** see `external-evals/scripts/finetune_bge_m3_mps.py` for training and `external-evals/scripts/run_pulse_v3_finetuned_bge_m3.py` for evaluation. Adapter weights from the Mac MPS single-seed training run are not yet published; a clean GPU-trained release is planned.
+
+Result file: `pulse_v3-finetuned-bge-m3-zero-shot-20260515-2108.json` (in the private working repo — test-name labels reference deployment-specific entities, kept private per the public/private split policy).
 
 ### LLM-judge scoring (8-judge, 0-10 scale)
 
